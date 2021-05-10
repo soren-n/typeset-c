@@ -54,3 +54,6 @@ dkms.conf
 # Project specific
 build
 docs/_build
+
+# Macos specific
+.DS_Store
