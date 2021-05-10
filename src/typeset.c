@@ -3,6 +3,10 @@
 
 #include "typeset.h"
 
+/*
+  Arena
+*/
+
 struct typeset_arena {
   //
 };
@@ -14,6 +18,10 @@ typeset_arena* typeset_alloc_arena() {
 void typeset_free_arena(typeset_arena* arena) {
   //
 }
+
+/*
+  Layout
+*/
 
 enum layout_kind {
   LayoutKindNull,
@@ -146,6 +154,10 @@ typeset_layout* typeset_make_comp(
   return NULL;
 }
 
+/*
+  Fixed
+*/
+
 enum fixed_kind {
   DocumentFixedKindText,
   DocumentFixedKindComp
@@ -169,6 +181,10 @@ struct typeset_fixed_comp {
   typeset_fixed* right;
   bool pad;
 };
+
+/*
+  Object
+*/
 
 enum object_kind {
   DocumentObjectKindText,
@@ -223,6 +239,10 @@ struct typeset_object_comp {
   typeset_object* right;
   bool pad;
 };
+
+/*
+  Document
+*/
 
 enum document_kind {
   DocumentKindEOD,

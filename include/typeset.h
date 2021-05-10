@@ -2,13 +2,17 @@
 
 #include <stdint.h>
 
-// Arena
+/*
+  Arena
+*/
 typedef struct typeset_arena typeset_arena;
 
 typeset_arena* typeset_alloc_arena();
 void typeset_free_arena(typeset_arena* arena);
 
-// Layout
+/*
+  Layout
+*/
 typedef struct typeset_layout typeset_layout;
 
 typeset_layout* typeset_make_null(
@@ -25,6 +29,7 @@ typeset_layout* typeset_make_fix(
   typeset_arena* arena,
   typeset_layout* layout
 );
+
 typeset_layout* typeset_make_grp(
   typeset_arena* arena,
   typeset_layout* layout
@@ -50,13 +55,16 @@ typeset_layout* typeset_make_line(
   typeset_layout* left,
   typeset_layout* right
 );
+
 typeset_layout* typeset_make_comp(
   typeset_arena* arena,
   typeset_layout* left,
   typeset_layout* right
 );
 
-// Document
+/*
+  Document
+*/
 typedef struct typeset_document typeset_document;
 
 typeset_document* typeset_compile(
@@ -64,10 +72,8 @@ typeset_document* typeset_compile(
   typeset_layout* layout
 );
 
-// Return is the max output length the document will be rendered as
 uint32_t typeset_max_length(typeset_document* document);
 
-// Return is the actual rendered output length
 uint32_t typeset_render(
   char* output_buffer,
   uint32_t indentation_width,
