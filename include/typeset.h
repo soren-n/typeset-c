@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /*
   Arena
@@ -21,7 +22,7 @@ typeset_layout* typeset_make_null(
 
 typeset_layout* typeset_make_text(
   typeset_arena* arena,
-  const char* data,
+  const char* content,
   uint32_t length
 );
 
@@ -59,7 +60,9 @@ typeset_layout* typeset_make_line(
 typeset_layout* typeset_make_comp(
   typeset_arena* arena,
   typeset_layout* left,
-  typeset_layout* right
+  typeset_layout* right,
+  bool pad,
+  bool fix
 );
 
 /*
