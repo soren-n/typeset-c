@@ -105,9 +105,10 @@ typedef struct typeset_layout_comp typeset_layout_comp;
 typeset_layout* typeset_make_null(
   typeset_arena* arena
 ) {
-  typeset_layout_null* result = (typeset_layout_null*)_typeset_arena_alloc(
-    sizeof(typeset_layout_null)
-  );
+  typeset_layout_null* result =
+    (typeset_layout_null*)_typeset_arena_alloc(
+      sizeof(typeset_layout_null)
+    );
   result->base.kind = LayoutKindNull;
   return (typeset_layout*)result;
 }
@@ -117,9 +118,10 @@ typeset_layout* typeset_make_text(
   const char* content,
   uint32_t length
 ) {
-  typeset_layout_text* result = (typeset_layout_text*)_typeset_arena_alloc(
-    sizeof(typeset_layout_text)
-  );
+  typeset_layout_text* result =
+    (typeset_layout_text*)_typeset_arena_alloc(
+      sizeof(typeset_layout_text)
+    );
   result->base.kind = LayoutKindText;
   result->content = content;
   result->length = length;
@@ -130,9 +132,10 @@ typeset_layout* typeset_make_fix(
   typeset_arena* arena,
   typeset_layout* layout
 ) {
-  typeset_layout_fix* result = (typeset_layout_fix*)_typeset_arena_alloc(
-    sizeof(typeset_layout_fix)
-  );
+  typeset_layout_fix* result =
+    (typeset_layout_fix*)_typeset_arena_alloc(
+      sizeof(typeset_layout_fix)
+    );
   result->base.kind = LayoutKindFix;
   result->layout = layout;
   return (typeset_layout*)result;
@@ -142,9 +145,10 @@ typeset_layout* typeset_make_grp(
   typeset_arena* arena,
   typeset_layout* layout
 ) {
-  typeset_layout_grp* result = (typeset_layout_grp*)_typeset_arena_alloc(
-    sizeof(typeset_layout_grp)
-  );
+  typeset_layout_grp* result =
+    (typeset_layout_grp*)_typeset_arena_alloc(
+      sizeof(typeset_layout_grp)
+    );
   result->base.kind = LayoutKindGrp;
   result->layout = layout;
   return (typeset_layout*)result;
@@ -154,9 +158,10 @@ typeset_layout* typeset_make_seq(
   typeset_arena* arena,
   typeset_layout* layout
 ) {
-  typeset_layout_seq* result = (typeset_layout_seq*)_typeset_arena_alloc(
-    sizeof(typeset_layout_seq)
-  );
+  typeset_layout_seq* result =
+    (typeset_layout_seq*)_typeset_arena_alloc(
+      sizeof(typeset_layout_seq)
+    );
   result->base.kind = LayoutKindSeq;
   result->layout = layout;
   return (typeset_layout*)result;
@@ -166,9 +171,10 @@ typeset_layout* typeset_make_nest(
   typeset_arena* arena,
   typeset_layout* layout
 ) {
-  typeset_layout_nest* result = (typeset_layout_nest*)_typeset_arena_alloc(
-    sizeof(typeset_layout_nest)
-  );
+  typeset_layout_nest* result =
+    (typeset_layout_nest*)_typeset_arena_alloc(
+      sizeof(typeset_layout_nest)
+    );
   result->base.kind = LayoutKindNest;
   result->layout = layout;
   return (typeset_layout*)result;
@@ -178,9 +184,10 @@ typeset_layout* typeset_make_pack(
   typeset_arena* arena,
   typeset_layout* layout
 ) {
-  typeset_layout_pack* result = (typeset_layout_pack*)_typeset_arena_alloc(
-    sizeof(typeset_layout_pack)
-  );
+  typeset_layout_pack* result =
+    (typeset_layout_pack*)_typeset_arena_alloc(
+      sizeof(typeset_layout_pack)
+    );
   result->base.kind = LayoutKindPack;
   result->layout = layout;
   return (typeset_layout*)result;
@@ -191,9 +198,10 @@ typeset_layout* typeset_make_line(
   typeset_layout* left,
   typeset_layout* right
 ) {
-  typeset_layout_line* result = (typeset_layout_line*)_typeset_arena_alloc(
-    sizeof(typeset_layout_line)
-  );
+  typeset_layout_line* result =
+    (typeset_layout_line*)_typeset_arena_alloc(
+      sizeof(typeset_layout_line)
+    );
   result->base.kind = LayoutKindLine;
   result->left = left;
   result->right = right;
@@ -207,9 +215,10 @@ typeset_layout* typeset_make_comp(
   bool pad,
   bool fix
 ) {
-  typeset_layout_comp* result = (typeset_layout_comp*)_typeset_arena_alloc(
-    sizeof(typeset_layout_comp)
-  );
+  typeset_layout_comp* result =
+    (typeset_layout_comp*)_typeset_arena_alloc(
+      sizeof(typeset_layout_comp)
+    );
   result->base.kind = LayoutKindComp;
   result->left = left;
   result->right = right;
@@ -223,8 +232,8 @@ typeset_layout* typeset_make_comp(
 */
 
 enum fixed_kind {
-  DocumentFixedKindText,
-  DocumentFixedKindComp
+  FixedKindText,
+  FixedKindComp
 };
 typedef enum fixed_kind fixed_kind;
 
@@ -238,6 +247,7 @@ struct typeset_fixed_text {
   const char* content;
   uint32_t length;
 };
+typedef struct typeset_fixed_text typeset_fixed_text;
 
 struct typeset_fixed_comp {
   typeset_fixed base;
@@ -245,13 +255,21 @@ struct typeset_fixed_comp {
   typeset_fixed* right;
   bool pad;
 };
+typedef struct typeset_fixed_comp typeset_fixed_comp;
 
 typeset_fixed* _typeset_make_fixed_text(
   typeset_arena* arena,
   const char* content,
   uint32_t length
 ) {
-  return NULL;
+  typeset_fixed_text* result =
+    (typeset_fixed_text*)_typeset_arena_alloc(
+      sizeof(typeset_fixed_text)
+    );
+  result->base.kind = FixedKindText;
+  result->content = content;
+  result->length = length;
+  return (typeset_fixed*)result;
 }
 
 typeset_fixed* _typeset_make_fixed_comp(
@@ -260,7 +278,15 @@ typeset_fixed* _typeset_make_fixed_comp(
   typeset_fixed* right,
   bool pad
 ) {
-  return NULL;
+  typeset_fixed_comp* result =
+    (typeset_fixed_comp*)_typeset_arena_alloc(
+      sizeof(typeset_fixed_comp)
+    );
+  result->base.kind = FixedKindComp;
+  result->left = left;
+  result->right = right;
+  result->pad = pad;
+  return (typeset_fixed*)result;
 }
 
 /*
@@ -268,13 +294,13 @@ typeset_fixed* _typeset_make_fixed_comp(
 */
 
 enum object_kind {
-  DocumentObjectKindText,
-  DocumentObjectKindFix,
-  DocumentObjectKindGrp,
-  DocumentObjectKindSeq,
-  DocumentObjectKindNest,
-  DocumentObjectKindPack,
-  DocumentObjectKindComp
+  ObjectKindText,
+  ObjectKindFix,
+  ObjectKindGrp,
+  ObjectKindSeq,
+  ObjectKindNest,
+  ObjectKindPack,
+  ObjectKindComp
 };
 typedef enum object_kind object_kind;
 
@@ -288,31 +314,37 @@ struct typeset_object_text {
   const char* content;
   uint32_t length;
 };
+typedef struct typeset_object_text typeset_object_text;
 
 struct typeset_object_fix {
   typeset_object base;
   typeset_fixed* fixed;
 };
+typedef struct typeset_object_fix typeset_object_fix;
 
 struct typeset_object_grp {
   typeset_object base;
   typeset_object* object;
 };
+typedef struct typeset_object_grp typeset_object_grp;
 
 struct typeset_object_seq {
   typeset_object base;
   typeset_object* object;
 };
+typedef struct typeset_object_seq typeset_object_seq;
 
 struct typeset_object_nest {
   typeset_object base;
   typeset_object* object;
 };
+typedef struct typeset_object_nest typeset_object_nest;
 
 struct typeset_object_pack {
   typeset_object base;
   typeset_object* object;
 };
+typedef struct typeset_object_pack typeset_object_pack;
 
 struct typeset_object_comp {
   typeset_object base;
@@ -320,48 +352,86 @@ struct typeset_object_comp {
   typeset_object* right;
   bool pad;
 };
+typedef struct typeset_object_comp typeset_object_comp;
 
 typeset_object* _typeset_make_object_text(
   typeset_arena* arena,
   const char* content,
   uint32_t length
 ) {
-  return NULL;
+  typeset_object_text* result =
+    (typeset_object_text*)_typeset_arena_alloc(
+      sizeof(typeset_object_text)
+    );
+  result->base.kind = ObjectKindText;
+  result->content = content;
+  result->length = length;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_fix(
   typeset_arena* arena,
-  typeset_object* object
+  typeset_fixed* fixed
 ) {
-  return NULL;
+  typeset_object_fix* result =
+    (typeset_object_fix*)_typeset_arena_alloc(
+      sizeof(typeset_object_fix)
+    );
+  result->base.kind = ObjectKindFix;
+  result->fixed = fixed;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_grp(
   typeset_arena* arena,
   typeset_object* object
 ) {
-  return NULL;
+  typeset_object_grp* result =
+    (typeset_object_grp*)_typeset_arena_alloc(
+      sizeof(typeset_object_grp)
+    );
+  result->base.kind = ObjectKindGrp;
+  result->object = object;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_seq(
   typeset_arena* arena,
   typeset_object* object
 ) {
-  return NULL;
+  typeset_object_seq* result =
+    (typeset_object_seq*)_typeset_arena_alloc(
+      sizeof(typeset_object_seq)
+    );
+  result->base.kind = ObjectKindSeq;
+  result->object = object;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_nest(
   typeset_arena* arena,
   typeset_object* object
 ) {
-  return NULL;
+  typeset_object_nest* result =
+    (typeset_object_nest*)_typeset_arena_alloc(
+      sizeof(typeset_object_nest)
+    );
+  result->base.kind = ObjectKindNest;
+  result->object = object;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_pack(
   typeset_arena* arena,
   typeset_object* object
 ) {
-  return NULL;
+  typeset_object_pack* result =
+    (typeset_object_pack*)_typeset_arena_alloc(
+      sizeof(typeset_object_pack)
+    );
+  result->base.kind = ObjectKindPack;
+  result->object = object;
+  return (typeset_object*)result;
 }
 
 typeset_object* _typeset_make_object_comp(
@@ -370,7 +440,15 @@ typeset_object* _typeset_make_object_comp(
   typeset_object* right,
   bool pad
 ) {
-  return NULL;
+  typeset_object_comp* result =
+    (typeset_object_comp*)_typeset_arena_alloc(
+      sizeof(typeset_object_comp)
+    );
+  result->base.kind = ObjectKindComp;
+  result->left = left;
+  result->right = right;
+  result->pad = pad;
+  return (typeset_object*)result;
 }
 
 /*
@@ -392,34 +470,49 @@ struct typeset_document {
 struct typeset_document_eod {
   typeset_document base;
 };
+typedef struct typeset_document_eod typeset_document_eod;
 
 struct typeset_document_empty {
   typeset_document base;
   typeset_document* document;
 };
+typedef struct typeset_document_empty typeset_document_empty;
 
 struct typeset_document_break {
   typeset_document base;
   typeset_object* object;
   typeset_document* document;
 };
+typedef struct typeset_document_break typeset_document_break;
 
 struct typeset_document_line {
   typeset_document base;
   typeset_object* object;
 };
+typedef struct typeset_document_line typeset_document_line;
 
 typeset_document* _typeset_make_document_eod(
   typeset_arena* arena
 ) {
-  return NULL;
+  typeset_document_eod* result =
+    (typeset_document_eod*)_typeset_arena_alloc(
+      sizeof(typeset_document_eod)
+    );
+  result->base.kind = DocumentKindEOD;
+  return (typeset_document*)result;
 }
 
 typeset_document* _typeset_make_document_empty(
   typeset_arena* arena,
   typeset_document* document
 ) {
-  return NULL;
+  typeset_document_empty* result =
+    (typeset_document_empty*)_typeset_arena_alloc(
+      sizeof(typeset_document_eod)
+    );
+  result->base.kind = DocumentKindEmpty;
+  result->document = document;
+  return (typeset_document*)result;
 }
 
 typeset_document* _typeset_make_document_break(
@@ -427,14 +520,27 @@ typeset_document* _typeset_make_document_break(
   typeset_object* object,
   typeset_document* document
 ) {
-  return NULL;
+  typeset_document_break* result =
+    (typeset_document_break*)_typeset_arena_alloc(
+      sizeof(typeset_document_break)
+    );
+  result->base.kind = DocumentKindBreak;
+  result->object = object;
+  result->document = document;
+  return (typeset_document*)result;
 }
 
 typeset_document* _typeset_make_document_line(
   typeset_arena* arena,
   typeset_object* object
 ) {
-  return NULL;
+  typeset_document_line* result =
+    (typeset_document_line*)_typeset_arena_alloc(
+      sizeof(typeset_document_line)
+    );
+  result->base.kind = DocumentKindLine;
+  result->object = object;
+  return (typeset_document*)result;
 }
 
 typeset_document* typeset_compile(
