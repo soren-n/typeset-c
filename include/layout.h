@@ -3,15 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-/*
-  Arena
-*/
-typedef struct typeset_arena typeset_arena;
-
-typeset_arena* typeset_alloc_arena();
-void typeset_scrub_arena(typeset_arena* arena);
-void typeset_free_arena(typeset_arena* arena);
-void* typeset_arena_alloc(typeset_arena* arena, size_t size);
+#include "arena.h"
 
 /*
   Layout
@@ -65,23 +57,4 @@ typeset_layout* typeset_make_comp(
   typeset_layout* right,
   bool pad,
   bool fix
-);
-
-/*
-  Document
-*/
-typedef struct typeset_document typeset_document;
-
-typeset_document* typeset_compile(
-  typeset_arena* arena,
-  typeset_layout* layout
-);
-
-uint32_t typeset_max_length(typeset_document* document);
-
-uint32_t typeset_render(
-  char* output_buffer,
-  uint32_t indentation_width,
-  uint32_t layout_buffer_width,
-  typeset_document* document
 );

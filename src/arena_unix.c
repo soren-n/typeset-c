@@ -1,10 +1,9 @@
-#include <stddef.h>
 #include <unistd.h>
 
 #include <sys/mman.h>
 #include <fcntl.h>
 
-#include "typeset.h"
+#include "arena.h"
 
 /*
   Arena

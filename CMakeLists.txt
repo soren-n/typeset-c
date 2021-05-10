@@ -7,7 +7,8 @@ conan_basic_setup()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(TYPESET_SOURCES
-  src/typeset.c
+  src/layout.c
+  src/document.c
 )
 if(${CONAN_SETTINGS_OS_BUILD} STREQUAL "Macos")
   set(TYPESET_SOURCES ${TYPESET_SOURCES}
