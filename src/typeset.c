@@ -3,26 +3,6 @@
 #include "typeset.h"
 
 /*
-  Arena
-*/
-
-struct typeset_arena {
-  //
-};
-
-typeset_arena* typeset_alloc_arena() {
-  return NULL;
-}
-
-void typeset_free_arena(typeset_arena* arena) {
-  //
-}
-
-void* _typeset_arena_alloc(size_t size) {
-  return NULL;
-}
-
-/*
   Layout
 */
 
@@ -106,8 +86,8 @@ typeset_layout* typeset_make_null(
   typeset_arena* arena
 ) {
   typeset_layout_null* result =
-    (typeset_layout_null*)_typeset_arena_alloc(
-      sizeof(typeset_layout_null)
+    (typeset_layout_null*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_null)
     );
   result->base.kind = LayoutKindNull;
   return (typeset_layout*)result;
@@ -119,8 +99,8 @@ typeset_layout* typeset_make_text(
   uint32_t length
 ) {
   typeset_layout_text* result =
-    (typeset_layout_text*)_typeset_arena_alloc(
-      sizeof(typeset_layout_text)
+    (typeset_layout_text*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_text)
     );
   result->base.kind = LayoutKindText;
   result->content = content;
@@ -133,8 +113,8 @@ typeset_layout* typeset_make_fix(
   typeset_layout* layout
 ) {
   typeset_layout_fix* result =
-    (typeset_layout_fix*)_typeset_arena_alloc(
-      sizeof(typeset_layout_fix)
+    (typeset_layout_fix*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_fix)
     );
   result->base.kind = LayoutKindFix;
   result->layout = layout;
@@ -146,8 +126,8 @@ typeset_layout* typeset_make_grp(
   typeset_layout* layout
 ) {
   typeset_layout_grp* result =
-    (typeset_layout_grp*)_typeset_arena_alloc(
-      sizeof(typeset_layout_grp)
+    (typeset_layout_grp*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_grp)
     );
   result->base.kind = LayoutKindGrp;
   result->layout = layout;
@@ -159,8 +139,8 @@ typeset_layout* typeset_make_seq(
   typeset_layout* layout
 ) {
   typeset_layout_seq* result =
-    (typeset_layout_seq*)_typeset_arena_alloc(
-      sizeof(typeset_layout_seq)
+    (typeset_layout_seq*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_seq)
     );
   result->base.kind = LayoutKindSeq;
   result->layout = layout;
@@ -172,8 +152,8 @@ typeset_layout* typeset_make_nest(
   typeset_layout* layout
 ) {
   typeset_layout_nest* result =
-    (typeset_layout_nest*)_typeset_arena_alloc(
-      sizeof(typeset_layout_nest)
+    (typeset_layout_nest*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_nest)
     );
   result->base.kind = LayoutKindNest;
   result->layout = layout;
@@ -185,8 +165,8 @@ typeset_layout* typeset_make_pack(
   typeset_layout* layout
 ) {
   typeset_layout_pack* result =
-    (typeset_layout_pack*)_typeset_arena_alloc(
-      sizeof(typeset_layout_pack)
+    (typeset_layout_pack*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_pack)
     );
   result->base.kind = LayoutKindPack;
   result->layout = layout;
@@ -199,8 +179,8 @@ typeset_layout* typeset_make_line(
   typeset_layout* right
 ) {
   typeset_layout_line* result =
-    (typeset_layout_line*)_typeset_arena_alloc(
-      sizeof(typeset_layout_line)
+    (typeset_layout_line*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_line)
     );
   result->base.kind = LayoutKindLine;
   result->left = left;
@@ -216,8 +196,8 @@ typeset_layout* typeset_make_comp(
   bool fix
 ) {
   typeset_layout_comp* result =
-    (typeset_layout_comp*)_typeset_arena_alloc(
-      sizeof(typeset_layout_comp)
+    (typeset_layout_comp*)typeset_arena_alloc(
+      arena, sizeof(typeset_layout_comp)
     );
   result->base.kind = LayoutKindComp;
   result->left = left;
@@ -263,8 +243,8 @@ typeset_fixed* _typeset_make_fixed_text(
   uint32_t length
 ) {
   typeset_fixed_text* result =
-    (typeset_fixed_text*)_typeset_arena_alloc(
-      sizeof(typeset_fixed_text)
+    (typeset_fixed_text*)typeset_arena_alloc(
+      arena, sizeof(typeset_fixed_text)
     );
   result->base.kind = FixedKindText;
   result->content = content;
@@ -279,8 +259,8 @@ typeset_fixed* _typeset_make_fixed_comp(
   bool pad
 ) {
   typeset_fixed_comp* result =
-    (typeset_fixed_comp*)_typeset_arena_alloc(
-      sizeof(typeset_fixed_comp)
+    (typeset_fixed_comp*)typeset_arena_alloc(
+      arena, sizeof(typeset_fixed_comp)
     );
   result->base.kind = FixedKindComp;
   result->left = left;
@@ -360,8 +340,8 @@ typeset_object* _typeset_make_object_text(
   uint32_t length
 ) {
   typeset_object_text* result =
-    (typeset_object_text*)_typeset_arena_alloc(
-      sizeof(typeset_object_text)
+    (typeset_object_text*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_text)
     );
   result->base.kind = ObjectKindText;
   result->content = content;
@@ -374,8 +354,8 @@ typeset_object* _typeset_make_object_fix(
   typeset_fixed* fixed
 ) {
   typeset_object_fix* result =
-    (typeset_object_fix*)_typeset_arena_alloc(
-      sizeof(typeset_object_fix)
+    (typeset_object_fix*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_fix)
     );
   result->base.kind = ObjectKindFix;
   result->fixed = fixed;
@@ -387,8 +367,8 @@ typeset_object* _typeset_make_object_grp(
   typeset_object* object
 ) {
   typeset_object_grp* result =
-    (typeset_object_grp*)_typeset_arena_alloc(
-      sizeof(typeset_object_grp)
+    (typeset_object_grp*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_grp)
     );
   result->base.kind = ObjectKindGrp;
   result->object = object;
@@ -400,8 +380,8 @@ typeset_object* _typeset_make_object_seq(
   typeset_object* object
 ) {
   typeset_object_seq* result =
-    (typeset_object_seq*)_typeset_arena_alloc(
-      sizeof(typeset_object_seq)
+    (typeset_object_seq*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_seq)
     );
   result->base.kind = ObjectKindSeq;
   result->object = object;
@@ -413,8 +393,8 @@ typeset_object* _typeset_make_object_nest(
   typeset_object* object
 ) {
   typeset_object_nest* result =
-    (typeset_object_nest*)_typeset_arena_alloc(
-      sizeof(typeset_object_nest)
+    (typeset_object_nest*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_nest)
     );
   result->base.kind = ObjectKindNest;
   result->object = object;
@@ -426,8 +406,8 @@ typeset_object* _typeset_make_object_pack(
   typeset_object* object
 ) {
   typeset_object_pack* result =
-    (typeset_object_pack*)_typeset_arena_alloc(
-      sizeof(typeset_object_pack)
+    (typeset_object_pack*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_pack)
     );
   result->base.kind = ObjectKindPack;
   result->object = object;
@@ -441,8 +421,8 @@ typeset_object* _typeset_make_object_comp(
   bool pad
 ) {
   typeset_object_comp* result =
-    (typeset_object_comp*)_typeset_arena_alloc(
-      sizeof(typeset_object_comp)
+    (typeset_object_comp*)typeset_arena_alloc(
+      arena, sizeof(typeset_object_comp)
     );
   result->base.kind = ObjectKindComp;
   result->left = left;
@@ -495,8 +475,8 @@ typeset_document* _typeset_make_document_eod(
   typeset_arena* arena
 ) {
   typeset_document_eod* result =
-    (typeset_document_eod*)_typeset_arena_alloc(
-      sizeof(typeset_document_eod)
+    (typeset_document_eod*)typeset_arena_alloc(
+      arena, sizeof(typeset_document_eod)
     );
   result->base.kind = DocumentKindEOD;
   return (typeset_document*)result;
@@ -507,8 +487,8 @@ typeset_document* _typeset_make_document_empty(
   typeset_document* document
 ) {
   typeset_document_empty* result =
-    (typeset_document_empty*)_typeset_arena_alloc(
-      sizeof(typeset_document_eod)
+    (typeset_document_empty*)typeset_arena_alloc(
+      arena, sizeof(typeset_document_eod)
     );
   result->base.kind = DocumentKindEmpty;
   result->document = document;
@@ -521,8 +501,8 @@ typeset_document* _typeset_make_document_break(
   typeset_document* document
 ) {
   typeset_document_break* result =
-    (typeset_document_break*)_typeset_arena_alloc(
-      sizeof(typeset_document_break)
+    (typeset_document_break*)typeset_arena_alloc(
+      arena, sizeof(typeset_document_break)
     );
   result->base.kind = DocumentKindBreak;
   result->object = object;
@@ -535,8 +515,8 @@ typeset_document* _typeset_make_document_line(
   typeset_object* object
 ) {
   typeset_document_line* result =
-    (typeset_document_line*)_typeset_arena_alloc(
-      sizeof(typeset_document_line)
+    (typeset_document_line*)typeset_arena_alloc(
+      arena, sizeof(typeset_document_line)
     );
   result->base.kind = DocumentKindLine;
   result->object = object;

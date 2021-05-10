@@ -6,9 +6,23 @@ conan_basic_setup()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_library(typeset
+set(TYPESET_SOURCES
   src/typeset.c
-  include/typeset.h
 )
+if(${CONAN_SETTINGS_OS_BUILD} STREQUAL "Macos")
+  set(TYPESET_SOURCES ${TYPESET_SOURCES}
+    src/arena_unix.c
+  )
+elseif(${CONAN_SETTINGS_OS_BUILD} STREQUAL "Linux")
+  set(TYPESET_SOURCES ${TYPESET_SOURCES}
+    src/arena_unix.c
+  )
+elseif(${CONAN_SETTINGS_OS_BUILD} STREQUAL "Windows")
+  set(TYPESET_SOURCES ${TYPESET_SOURCES}
+    src/arena_windows.c
+  )
+endif()
+
+add_library(typeset ${TYPESET_SOURCES})
 
 target_link_libraries(typeset ${CONAN_LIBS})
