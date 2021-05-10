@@ -246,6 +246,23 @@ struct typeset_fixed_comp {
   bool pad;
 };
 
+typeset_fixed* _typeset_make_fixed_text(
+  typeset_arena* arena,
+  const char* content,
+  uint32_t length
+) {
+  return NULL;
+}
+
+typeset_fixed* _typeset_make_fixed_comp(
+  typeset_arena* arena,
+  typeset_fixed* left,
+  typeset_fixed* right,
+  bool pad
+) {
+  return NULL;
+}
+
 /*
   Object
 */
@@ -304,6 +321,58 @@ struct typeset_object_comp {
   bool pad;
 };
 
+typeset_object* _typeset_make_object_text(
+  typeset_arena* arena,
+  const char* content,
+  uint32_t length
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_fix(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_grp(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_seq(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_nest(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_pack(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
+
+typeset_object* _typeset_make_object_comp(
+  typeset_arena* arena,
+  typeset_object* left,
+  typeset_object* right,
+  bool pad
+) {
+  return NULL;
+}
+
 /*
   Document
 */
@@ -339,6 +408,34 @@ struct typeset_document_line {
   typeset_document base;
   typeset_object* object;
 };
+
+typeset_document* _typeset_make_document_eod(
+  typeset_arena* arena
+) {
+  return NULL;
+}
+
+typeset_document* _typeset_make_document_empty(
+  typeset_arena* arena,
+  typeset_document* document
+) {
+  return NULL;
+}
+
+typeset_document* _typeset_make_document_break(
+  typeset_arena* arena,
+  typeset_object* object,
+  typeset_document* document
+) {
+  return NULL;
+}
+
+typeset_document* _typeset_make_document_line(
+  typeset_arena* arena,
+  typeset_object* object
+) {
+  return NULL;
+}
 
 typeset_document* typeset_compile(
   typeset_arena* arena,
